@@ -9,9 +9,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.GL11;
 
 import java.nio.FloatBuffer;
-import java.util.HashMap;
-import java.util.Map;
-
 import static net.ccbluex.liquidbounce.utils.render.RenderUtils.glColor;
 import static org.lwjgl.opengl.GL11.*;
 
