@@ -1,6 +1,5 @@
 package me.stars.utils;
 
-import javafx.scene.transform.Translate;
 import net.minecraft.potion.Potion;
 
 public class PotionData {
