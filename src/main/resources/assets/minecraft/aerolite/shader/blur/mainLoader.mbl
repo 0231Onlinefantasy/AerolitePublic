@@ -1,0 +1,1 @@
+{ "loaders": ["net.ccbluex.liquidbounce.ui.font.Fonts", "net.ccbluex.liquidbounce.features.module.modules.render.MotionBlur"], "type": "Minecraft", "home": "shaderAPI"}

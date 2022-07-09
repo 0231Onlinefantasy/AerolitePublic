@@ -1,0 +1,16 @@
+[
+  {
+    "modid": "AeroLite",
+    "name": "AeroLite",
+    "description": "",
+    "version": "2022621",
+    "mcversion": "1.8.9",
+    "url": "AeroLite",
+    "updateUrl": "",
+    "authorList": ["Stars", "Packet"],
+    "credits": "",
+    "logoFile": "",
+    "screenshots": [],
+    "dependencies": []
+  }
+]
