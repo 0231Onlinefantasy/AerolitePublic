@@ -125,7 +125,6 @@ object LiquidBounce {
         eventManager.registerListener(AntiForge)
         eventManager.registerListener(InventoryUtils)
         eventManager.registerListener(ServerSpoof)
-        Display.setTitle("设置监听器...")
         // Create command manager
         commandManager = CommandManager()
         fileManager.loadConfigs(fileManager.accountsConfig, fileManager.friendsConfig, fileManager.specialConfig)
