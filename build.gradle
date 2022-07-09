@@ -22,9 +22,9 @@ repositories {
     }
 }
 
-version = "2022618"
-group = "org.unlegitmc.fdp"
-archivesBaseName = "AeroLite - Hreith"
+version = "v2"
+group = "cn.stars.aerolite"
+archivesBaseName = "Aerolite"
 
 sourceCompatibility = targetCompatibility = 1.8
 compileJava.options.encoding = "UTF-8"
@@ -129,7 +129,7 @@ jar {
 mixin {
     disableRefMapWarning = true
     defaultObfuscationEnv searge
-    add sourceSets.main, "mixins.fdpclient.refmap.json"
+    add sourceSets.main, "mixins.aerolite.refmap.json"
 }
 
 reobf {
