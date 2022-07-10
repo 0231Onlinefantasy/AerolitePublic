@@ -5,9 +5,6 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.client;
 
-import com.sun.java.swing.plaf.windows.WindowsGraphicsUtils;
-import com.sun.jna.platform.WindowUtils;
-import de.enzaxd.viaforge.ViaForge;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.client.Modules;
