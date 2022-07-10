@@ -17,7 +17,7 @@ import java.io.File
 import java.util.*
 
 object ClientUtils : MinecraftInstance() {
-    private val logger = LogManager.getLogger("AeroLite")
+    private val logger = LogManager.getLogger("Aerolite")
     val osType: EnumOSType
     val FMLtaskTimer = MSTimer()
     var inDevMode = System.getProperty("dev-mode") != null
@@ -107,11 +107,11 @@ object ClientUtils : MinecraftInstance() {
 
     fun setTitle() {
         //Display.setTitle("${LiquidBounce.CLIENT_NAME}正在注入核心,请稍后!")
-        Display.setTitle("${LiquidBounce.CLIENT_NAME}正在加载Coremod中...")
+        Display.setTitle("你不会真以为我们跑路了罢(恼)")
     }
 
     fun finishTitle() {
-        Display.setTitle(LiquidBounce.CLIENT_NAME + " " + LiquidBounce.CLIENT_REAL_VERSION/* + " | " + LiquidBounce.DEV_SAYING */)
+        Display.setTitle(LiquidBounce.CLIENT_NAME + " " + LiquidBounce.CLIENT_REAL_VERSION + " | 好啊,很好啊(赞赏,指启动成功)"/* + " | " + LiquidBounce.DEV_SAYING */)
     }
 
     fun displayAlert(message: String) {
