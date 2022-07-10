@@ -26,7 +26,7 @@ import kotlin.concurrent.schedule
 @ModuleInfo(name = "AutoPlay", category = ModuleCategory.MISC)
 class AutoPlay : Module() {
 
-    private val modeValue = ListValue("Server", arrayOf("RedeSky", "BlocksMC", "Minemora", "Hypixel","Jartex", "Pika",  "HytBW1", "HytBW2", "HytMW"), "RedeSky")
+    private val modeValue = ListValue("Server", arrayOf("Redesky", "BlocksMC", "Minemora", "Hypixel","Jartex", "Pika", "SuperCraft", "Hycraft"), "Redesky")
     private val delayValue = IntegerValue("JoinDelay", 3, 0, 7)
 
     private var clicking = false
@@ -106,10 +106,35 @@ class AutoPlay : Module() {
             val text = packet.chatComponent.unformattedText
             val component = packet.chatComponent
             when (modeValue.get().lowercase()) {
+                "supercraft" -> {
+                    if (text.contains("Ganador: " + mc.session.username, true) || text.contains(mc.session.username + " fue asesinado", true)) {
+                        queueAutoPlay {
+                            mc.thePlayer.sendChatMessage("/sw leave")
+                            mc.thePlayer.sendChatMessage("/sw randomjoin solo")
+                        }
+                    }
+                    if (text.contains("El juego ya fue iniciado.", true)) {
+                        LiquidBounce.hud.addNotification(Notification(this.name, "Failed to join, retrying...", NotifyType.ERROR, 1755))
+                        queueAutoPlay {
+                            mc.thePlayer.sendChatMessage("/sw leave")
+                            mc.thePlayer.sendChatMessage("/sw randomjoin solo")
+                        }
+                    }
+                }
                 "minemora" -> {
                     if (text.contains("Has click en alguna de las siguientes opciones", true)) {
                         queueAutoPlay {
                             mc.thePlayer.sendChatMessage("/join")
+                        }
+                    }
+                }
+                "hycraft" -> {
+                    component.siblings.forEach { sib ->
+                        val clickEvent = sib.chatStyle.chatClickEvent
+                        if(clickEvent != null && clickEvent.action == ClickEvent.Action.RUN_COMMAND && clickEvent.value.contains("playagain")) {
+                            queueAutoPlay {
+                                mc.thePlayer.sendChatMessage(clickEvent.value)
+                            }
                         }
                     }
                 }
@@ -167,21 +192,6 @@ class AutoPlay : Module() {
                         }
                     }
                     process(packet.chatComponent)
-                }
-                "hytbw1" -> {
-                    if (text.contains("      喜欢      一般      不喜欢", true)) {
-                        LiquidBounce.hud.addNotification(Notification("AutoPlay-HytGame Ended", "Hyt Game Ended! Remember the next!", NotifyType.INFO, 3000))
-                    }
-                }
-                "hytbw2" -> {
-                    if (text.contains("赢得了游戏", true)) {
-                        LiquidBounce.hud.addNotification(Notification("AutoPlay-HytGame Ended", "Hyt Game Ended! Remember the next!", NotifyType.INFO, 3000))
-                    }
-                }
-                "hytmw" -> {
-                    if (text.contains("                                击杀排行榜", true)) {
-                        LiquidBounce.hud.addNotification(Notification("AutoPlay-HytGame Ended", "Hyt Game Ended! Remember the next!", NotifyType.INFO, 3000))
-                    }
                 }
             }
         }

@@ -40,7 +40,7 @@ class Criticals : Module() {
         "Motion", "Hover", "Custom"),
         "packet")
     // Other Lists
-    private val motionValue = ListValue("MotionMode", arrayOf("RedeSkyLowHop", "Hop", "Jump", "LowJump", "MinemoraTest", "TPHop", "TestMotion", "AAC5"), "Jump")
+    private val motionValue = ListValue("MotionMode", arrayOf("RedeSkyLowHop", "Hop", "Jump", "LowJump", "MinemoraTest", "TPHop", "AAC5", "NCPSilent"), "Jump")
     private val hoverValue = ListValue("HoverMode", arrayOf("AAC4", "AAC4Other", "VeryLow", "OldRedesky", "Normal1", "Normal2", "Normal3","Minis", "Minis2", "TPCollide", "2b2t"), "AAC4")
     // Hover
     private val hoverNoFall = BoolValue("HoverNoFall", true).displayable { modeValue.equals("Hover") }
@@ -305,6 +305,11 @@ class Criticals : Module() {
                             sendCriticalPacket(yOffset = 0.02, ground = false)
                             sendCriticalPacket(yOffset = 0.01, ground = false)
                             mc.thePlayer.setPosition(mc.thePlayer.posX, mc.thePlayer.posY + 0.01, mc.thePlayer.posZ)
+                        }
+                        "ncpsilent" -> {
+                            sendPacket(0.42, false)
+                            sendPacket(0.222, false)
+                            sendPacket(0.0, true)
                         }
                         "lowjump" -> mc.thePlayer.motionY = 0.3425
                         "redeskylowhop" -> mc.thePlayer.motionY = 0.35
