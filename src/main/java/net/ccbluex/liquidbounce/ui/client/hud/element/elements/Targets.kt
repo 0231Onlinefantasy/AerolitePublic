@@ -1,10 +1,6 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements
 
-import me.xinhai.RandomUtil
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.features.module.modules.combat.InfiniteAura
-import net.ccbluex.liquidbounce.features.module.modules.combat.KillAura
-import net.ccbluex.liquidbounce.launch.data.legacyui.clickgui.RenderUtils.drawHead
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
@@ -12,20 +8,14 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.CharRenderer
-import net.ccbluex.liquidbounce.utils.Colors
 import net.ccbluex.liquidbounce.utils.extensions.*
 import net.ccbluex.liquidbounce.utils.misc.RandomUtils
 import net.ccbluex.liquidbounce.utils.render.*
 import net.ccbluex.liquidbounce.value.*
-import net.minecraft.client.gui.FontRenderer
-import net.minecraft.client.gui.GuiChat
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.RenderHelper
 import net.minecraft.entity.EntityLivingBase
-import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.util.ResourceLocation
-import org.json.XMLTokener.entity
 import org.lwjgl.opengl.GL11
 import java.awt.Color
 import java.text.DecimalFormat
@@ -233,7 +223,7 @@ class Targets : Element(-46.0, -40.0, 1F, Side(Side.Horizontal.MIDDLE, Side.Vert
                                 BlendUtils.blendColors(
                                     floatArrayOf(0F, 1F),
                                     arrayOf<Color>(Color.white, ColorUtils.rainbow()),
-                                    if (RandomUtil.nextBoolean()) RandomUtils.nextFloat(0.4F, 1.0F) else 0F
+                                    if (RandomUtils.nextBoolean()) RandomUtils.nextFloat(0.4F, 1.0F) else 0F
                                 ),
                                 RandomUtils.nextFloat(-30F, 30F),
                                 RandomUtils.nextFloat(-30F, 30F),

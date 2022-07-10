@@ -1,11 +1,11 @@
 [
   {
-    "modid": "AeroLite",
-    "name": "AeroLite",
-    "description": "",
-    "version": "2022621",
+    "modid": "Aerolite",
+    "name": "Aerolite",
+    "description": "A minecraft hack mod based on FDPClient",
+    "version": "v2.0",
     "mcversion": "1.8.9",
-    "url": "AeroLite",
+    "url": "aerolite.kt",
     "updateUrl": "",
     "authorList": ["Stars", "Packet"],
     "credits": "",
