@@ -7,8 +7,8 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.minecraft.network.play.client.C0DPacketCloseWindow
 
-@ModuleInfo(name = "CraftCarry", category = ModuleCategory.WORLD)
-class CraftCarry : Module() {
+@ModuleInfo(name = "NoInvClose", category = ModuleCategory.WORLD)
+class NoInvClose : Module() {
     @EventTarget
     fun onPacket(event: PacketEvent) {
         if (event.packet is C0DPacketCloseWindow)

@@ -20,8 +20,8 @@ import net.ccbluex.liquidbounce.value.TextValue
 class NameProtect : Module() {
     val allPlayersValue = BoolValue("AllPlayers", false)
     val skinProtectValue = BoolValue("SkinProtect", true)
-    private val fakeNameValue = TextValue("FakeName", "FDPUser")
-    private val playerNameValue = TextValue("PlayerName", "SIGMA_HATAR")
+    private val fakeNameValue = TextValue("FakeName", "AeroHacker")
+    private val playerNameValue = TextValue("PlayerName", "LOSER")
 
     @EventTarget(ignoreCondition = true)
     fun onText(event: TextEvent) {
