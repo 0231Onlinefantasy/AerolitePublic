@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.client;
 
+import de.enzaxd.viaforge.ViaForge;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.client.Modules;
@@ -12,6 +13,7 @@ import net.ccbluex.liquidbounce.features.module.modules.client.Rotations;
 import net.ccbluex.liquidbounce.features.module.modules.combat.AutoClicker;
 import net.ccbluex.liquidbounce.features.module.modules.world.FastPlace;
 import net.ccbluex.liquidbounce.injection.access.StaticStorage;
+import net.ccbluex.liquidbounce.injection.forge.mixins.access.MixinMinecraftForgeClient;
 import net.ccbluex.liquidbounce.utils.CPSCounter;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.RotationUtils;
@@ -35,9 +37,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Util;
+import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.Sys;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
+import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -120,11 +124,11 @@ public abstract class MixinMinecraft {
 
     @Inject(method = "<init>", at = @At("RETURN"))
     public void injectConstructor(GameConfiguration p_i45547_1_, CallbackInfo ci) {
-       // try {
-           // ViaForge.getInstance().start();
-       // } catch (Exception e) {
-       //     e.printStackTrace();
-      //  }
+        try {
+            ViaForge.getInstance().start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Inject(method = "run", at = @At("HEAD"))
@@ -159,6 +163,18 @@ public abstract class MixinMinecraft {
         LiquidBounce.eventManager.callEvent(new ScreenEvent(currentScreen));
     }
 
+    @SuppressWarnings("UnstableApiUsage")
+    @Inject(
+            method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V",
+            at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;theWorld:Lnet/minecraft/client/multiplayer/WorldClient;", opcode = Opcodes.PUTFIELD, shift = At.Shift.AFTER)
+    )
+    private void clearRenderCache(CallbackInfo ci) {
+        //noinspection ResultOfMethodCallIgnored
+        MinecraftForgeClient.getRenderPass(); // Ensure class is loaded, strange accessor issue
+        MixinMinecraftForgeClient.getRegionCache().invalidateAll();
+        MixinMinecraftForgeClient.getRegionCache().cleanUp();
+    }
+
     private long lastFrame = getTime();
 
     @Inject(method = "runGameLoop", at = @At("HEAD"))
@@ -189,6 +205,7 @@ public abstract class MixinMinecraft {
         if(Keyboard.getEventKeyState() && (currentScreen == null || (Modules.INSTANCE.getToggleIgnoreScreenValue().get() && this.currentScreen instanceof GuiContainer)))
             LiquidBounce.eventManager.callEvent(new KeyEvent(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey()));
     }
+
 
     @Inject(method = "sendClickBlockToController", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/MovingObjectPosition;getBlockPos()Lnet/minecraft/util/BlockPos;"))
     private void onClickBlock(CallbackInfo callbackInfo) {

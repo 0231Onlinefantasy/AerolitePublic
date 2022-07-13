@@ -107,11 +107,11 @@ object ClientUtils : MinecraftInstance() {
 
     fun setTitle() {
         //Display.setTitle("${LiquidBounce.CLIENT_NAME}正在注入核心,请稍后!")
-        Display.setTitle("你不会真以为我们跑路了罢(恼)")
+        Display.setTitle("Aerolite is waiting for coremod injection.")
     }
 
     fun finishTitle() {
-        Display.setTitle(LiquidBounce.CLIENT_NAME + " " + LiquidBounce.CLIENT_REAL_VERSION + " | 好啊,很好啊(赞赏,指启动成功)"/* + " | " + LiquidBounce.DEV_SAYING */)
+        Display.setTitle(LiquidBounce.CLIENT_NAME + " " + LiquidBounce.CLIENT_REAL_VERSION + " | 0716是作者的一个神秘数字哦"/* + " | " + LiquidBounce.DEV_SAYING */)
     }
 
     fun displayAlert(message: String) {

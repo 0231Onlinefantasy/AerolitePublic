@@ -41,7 +41,7 @@ class Criticals : Module() {
         "packet")
     // Other Lists
     private val motionValue = ListValue("MotionMode", arrayOf("RedeSkyLowHop", "Hop", "Jump", "LowJump", "MinemoraTest", "TPHop", "AAC5", "NCPSilent"), "Jump")
-    private val hoverValue = ListValue("HoverMode", arrayOf("AAC4", "AAC4Other", "VeryLow", "OldRedesky", "Normal1", "Normal2", "Normal3","Minis", "Minis2", "TPCollide", "2b2t"), "AAC4")
+    private val hoverValue = ListValue("HoverMode", arrayOf("AAC4", "AAC4Other", "OldRedesky", "Normal1", "Normal2", "Normal3","Minis", "Minis2", "TPCollide", "2b2t"), "AAC4")
     // Hover
     private val hoverNoFall = BoolValue("HoverNoFall", true).displayable { modeValue.equals("Hover") }
     private val hoverCombat = BoolValue("HoverOnlyCombat", true).displayable { modeValue.equals("Hover") }
@@ -283,21 +283,6 @@ class Criticals : Module() {
                     sendCriticalPacket(yOffset = 0.00150000001304, ground = false)
                 }
 
-                "blocksmcmove" -> {
-                    val motionX: Double
-                    val motionZ: Double
-                    if (MovementUtils.isMoving()) {
-                        motionX = mc.thePlayer.motionX
-                        motionZ = mc.thePlayer.motionZ
-                    } else {
-                        motionX = 0.00
-                        motionZ = 0.00
-                    }
-                    mc.thePlayer.triggerAchievement(StatList.jumpStat)
-                    sendCriticalPacket(xOffset = motionX / 4, yOffset = 0.20000004768372, zOffset = motionZ / 4, ground = false)
-                    sendCriticalPacket(xOffset = motionX / 2, yOffset = 0.12160004615784, zOffset = motionZ / 2, ground = false)
-                }
-
                 "motion" -> {
                     when (motionValue.get().lowercase()) {
                         "jump" -> mc.thePlayer.motionY = 0.42
@@ -505,23 +490,6 @@ class Criticals : Module() {
                                     3 -> packet.y += 0.0000005235532
                                     4 -> packet.y += 0.0000000194788
                                     5 -> packet.y += 0.00000000001314
-                                    6 -> {
-                                        if (hoverNoFall.get()) packet.onGround = true
-                                        jState = 1
-                                    }
-                                    else -> jState = 1
-                                }
-                            } else jState = 0
-                        }
-                        "verylow" -> {
-                            if (mc.thePlayer.onGround) {
-                                if (!(hoverNoFall.get() && jState == 0)) packet.onGround = false
-                                jState++
-                                when (jState) {
-                                    2 -> packet.y += 0.0000000000000001
-                                    3 -> packet.y += 0.0000000000000001
-                                    4 -> packet.y += 0.0000000000000001
-                                    5 -> packet.y += 0.0000000000000001
                                     6 -> {
                                         if (hoverNoFall.get()) packet.onGround = true
                                         jState = 1

@@ -6,6 +6,7 @@
 package net.ccbluex.liquidbounce.utils
 
 import net.ccbluex.liquidbounce.event.MoveEvent
+import net.minecraft.client.entity.EntityPlayerSP
 import net.minecraft.network.play.client.C03PacketPlayer.C04PacketPlayerPosition
 import net.minecraft.potion.Potion
 import net.minecraft.util.AxisAlignedBB
@@ -18,6 +19,17 @@ object MovementUtils : MinecraftInstance() {
     fun getSpeed(): Float {
         return sqrt(mc.thePlayer.motionX * mc.thePlayer.motionX + mc.thePlayer.motionZ * mc.thePlayer.motionZ).toFloat()
     }
+
+    val EntityPlayerSP.direction: Double
+        get() {
+            var rotationYaw = this.rotationYaw
+            if (this.moveForward < 0f) rotationYaw += 180f
+            var forward = 1f
+            if (this.moveForward < 0f) forward = -0.5f else if (this.moveForward > 0f) forward = 0.5f
+            if (this.moveStrafing > 0f) rotationYaw -= 90f * forward
+            if (this.moveStrafing < 0f) rotationYaw += 90f * forward
+            return Math.toRadians(rotationYaw.toDouble())
+        }
 
     fun getSpeed2(motionX: Double, motionZ: Double): Double {
         return Math.sqrt(motionX * motionX + motionZ * motionZ)

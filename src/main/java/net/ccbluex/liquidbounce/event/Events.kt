@@ -58,15 +58,6 @@ class ClientShutdownEvent : Event()
 
 class PreUpdateEvent(var x: Double, var y: Double, var z: Double, var yaw: Float, var pitch: Float, var isSneaking: Boolean, var isOnGround: Boolean) : Event() {
 
-    fun fire() {
-        prevYAW = YAW
-        prevPITCH = PITCH
-        YAW = yaw
-        PITCH = pitch
-        SNEAKING = isSneaking
-        OnGround = isOnGround
-    }
-
     fun getYaw(yaw: Float): Float {
         return yaw
     }
@@ -106,7 +97,7 @@ class KeyEvent(val key: Int) : Event()
  */
 //class MotionEvent(val eventState: EventState) : Event()
 
-class MotionEvent(var eventstate: EventState, var x: Double, var y: Double, var z: Double, var yaw: Float, var pitch: Float, var onGround: Boolean) : Event() {
+class MotionEvent(var eventstate: EventState, var x: Double, var y: Double, var z: Double, var yaw: Float, var pitch: Float, var onGround: Boolean) : CancellableEvent() {
     var eventState: EventState = eventstate
 }
 /**
